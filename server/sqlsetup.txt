@@ -1,0 +1,80 @@
+SQL vs MongoDB (Mental Model First)
+
+MongoDB                              SQL
+-=------------------------------------------------------------------
+Database                              databases
+Collection                             table
+Document(json)                           Row
+Field                                   coloumn 
+_id                                    primary key
+schema less                           schema-based
+sql is structured, realational, strict, and very powerfull for realations.
+
+2. Popular SQL databases
+ 
+ DB                use Case
+ mySql         most common, fast, simple
+ postgreSQL    Advanced, enterprise, JSON support
+ SQLite        Local/testing
+ MariaDB       MySQl alternative
+
+we will assume MySQL(same logic applies to postgres).
+
+3. installing &  setting up MySQL
+ubuntu : 
+sudo apt update
+sudo apt install mysql-server
+
+check:
+mysql --version
+
+login:
+sudo mysql
+
+create user(recommnded)
+CREATE USER 'suhail'@'localhost' INDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'suhail'@'localhost';
+FLUSH PRIVILAGES;
+
+To exit:
+ctrl + d
+
+to clear :
+ctrl + l
+
+to see all the databases :
+SHOW DATABASES;
+
+to create databases:
+ex: CREATE DATABASE cfi;
+
+to use database : 
+ex : USE cfi;
+
+to check in which database we are: 
+ex : SELECT DATABASE()
+
+to delete database : 
+ex : DROP DATABASE cfi
+
+to create tables:
+ CREATE TABLE users(
+    -> id INT,
+    -> name VARCHAR(50),
+    -> email VARCHAR(100)
+    -> );
+
+to view tables :
+SHOW TABLES;
+
+to check data in specific table :
+SELECT * FROM user;
+
+to insert data in table :
+INSERT INTO users VALUES(1,"afnan","afnan@gmail.com");
+
+to view data in table:
+SELECT * FROM users;
+
+to update data in table : 
+ex : UPDATE users SET name = "afnan" WHERE id = 1;

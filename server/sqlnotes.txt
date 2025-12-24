@@ -1,0 +1,207 @@
+WHAT IS SQL ?
+SQL :
+. A language
+. used to store, read, update, delete
+. Data stored in relational databases
+--> SQL is not a database
+MYSQL/ postgreSQL/ ORACLE are database that understand SQL
+
+
+REALATIONAL DATABASE - WHAT DOES IT MEAN ?
+A realational database stores data in:
+.Table
+.Connected via relationships
+Example : 
+instead of one big JSON:
+{
+    "user" : {
+        "name" : "suhail",
+        "orders" : [..]
+    }
+}
+
+SQL does : 
+.One table for users
+.One table for orders
+.linked using keys
+This avoids : duplication inconsistency messy updates
+
+CORE BUILDING BLOCKS
+---------------------------------------------
+1 DATABASE 
+Top-level containers
+   server
+     |
+     databases
+       | 
+       tables
+          | 
+          Rows
+            | 
+             coloumns
+
+
+MongoDB equivalent : 
+Cluster -> Databases -> Collection -> Document -> Fields
+
+
+2 TABLE
+A table is :
+. like an excel sheet
+. Has fixed follows same structured
+Example
+|id   |   name    |     email   | 
+| 1   |  suhail   |   s@gmail   |
+
+Unlike MOngoDb Everuy row msut match  schema
+
+3 Row record (RECORD)
+.One Complete data entry
+.one real-world entity
+MonogDB : Document
+
+4. Coloumn (FIELDS)
+. Defines what type of data
+. has data types
+. has constraints
+
+DATA TYPES(THEORY) 
+common  SQL types 
+|  type  |  Meaning             |
+| INT    | NUMBER               |
+| VARCHAR| text(limited lenght) |
+| TEXT   | long text            |
+| BOOLEAN| true/false           |
+| DATE   | date only            |
+|timestamp|  date+ time         |
+|DECIMAL  | Money/precision     |
+| ENUM    | fixed values        |
+
+SQL is strictly typed MongoDB is flexible
+
+KEYS(very important theory)
+
+primary keys
+ -uniquely identifies a row
+ -Cannot be NULL
+ -cannot repeat
+
+ex: id INT PRIMARY KEYS
+
+MONGODB equivalent: _id
+
+foreign keys
+ - connects two tables
+ - enforces realationship
+
+ex : orders.user_id -> users.id
+
+This is what makes SQL relational
+
+
+RELATIONSHIPS TYPES:
+1 One-to-one
+ .user <--> Profile
+user.id -> Profile.user_id
+
+2 One-to-many
+ .user -> orders
+ users.id -> orders.users_id
+
+3 Many-to-many
+ .students <-> Courses
+solved using junction table :
+
+student_courses
+(student_id, course_id)
+
+
+CONSTRAINTS (data safety rules)
+
+constraints proctects your data 
+contraints                Meaning
+--------------------------------------------
+not null                  value required
+unique                    No duplicates
+default                   Auto value
+check                     custom rule
+foreign key                relationship enforcement
+
+Example : 
+email VARCHAR(100) unique NOT NULL
+
+ACID PROPERTIES (WHY SQL IS TRUSTED)
+SQL databases follow ACID
+
+Property	Meaning
+-------------------------------------
+Atomicity	All or nothing
+Consistency	Rules always valid
+Isolation	Transactions don’t clash
+Durability	Data never lost
+
+This is why banking apps use SQL
+
+MongoDB supports this partially, SQL does it by design
+
+Transactions(theory)
+A Transaction = multiple steps treated as one unit
+
+Example:
+
+Deduct money
+1. Add order
+2. If step 2 fails → step 1 is undone
+
+BEGIN
+  step 1
+  step 2
+COMMIT / ROLLBACK
+NORMALIZATION (DESIGN THEORY)
+Goal:
+
+Avoid duplication
+Avoid anomalies
+Bad Design ❌
+users
+id | name | order1 | order2 | order3
+Good Design ✅
+users
+orders
+🔎 SQL vs MongoDB – WHEN TO USE SQL
+Use Case	Best
+Payments	SQL
+Inventory	SQL
+Banking	SQL
+Logs	MongoDB
+Analytics	MongoDB
+Flexible schemas	MongoDB
+🏗️ SQL ARCHITECTURE (HOW IT WORKS)
+Client (Express / App)
+   ↓ SQL Query
+Query Parser
+   ↓
+Optimizer
+   ↓
+Execution Engine
+   ↓
+Storage Engine
+🧠 IMPORTANT SQL TERMINOLOGY
+Term	Meaning
+Schema	Structure of tables
+Index	Faster search
+View	Virtual table
+Stored Procedure	Saved logic
+Trigger	Auto actions
+Migration	Schema changes
+🔥 SQL MINDSET SHIFT (FROM MONGO)
+❌ Embed everything ❌ Flexible structure
+
+✅ Think in relations ✅ Think in joins ✅ Design first, code later
+
+✅ WHAT YOU SHOULD REMEMBER NOW
+SQL is structured & relational
+Tables are connected via keys
+Schema is strict
+Data integrity is core
+SQL shines in critical systems
